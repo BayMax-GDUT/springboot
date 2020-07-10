@@ -1,0 +1,95 @@
+weixin:
+  appId: wxce821af608219fae
+  appSecret: cf0239cec0e101ce12d35d1be9680471
+  loginUrl: https://api.weixin.qq.com/sns/jscode2session
+
+# Tomcat
+server:
+#  tomcat:
+#    uri-encoding: UTF-8
+#    max-threads: 1000
+#    min-spare-threads: 30
+  port: 8017
+#  connection-timeout: 5000
+#  servlet:
+#    context-path: /
+
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/platform?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    username: root
+    password: liziyang
+    initial-size: 10
+    max-active: 100
+    min-idle: 10
+    max-wait: 60000
+    pool-prepared-statements: true
+    max-pool-prepared-statement-per-connection-size: 20
+    time-between-eviction-runs-millis: 60000
+    min-evictable-idle-time-millis: 300000
+    validation-query: SELECT 1 FROM DUAL
+    test-while-idle: true
+    test-on-borrow: false
+    test-on-return: false
+    stat-view-servlet:
+      enabled: true
+      url-pattern: /druid/*
+    filter:
+      stat:
+        log-slow-sql: true
+        slow-sql-millis: 1000
+        merge-sql: true
+      wall:
+        config:
+          multi-statement-allow: true
+
+  mvc:
+    throw-exception-if-no-handler-found: true
+  resources:
+    add-mappings: false
+#
+#mybatis-plus 驼峰
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+    # 延迟加载 未实现
+    lazy-loading-enabled: true
+    aggressive-lazy-loading: false
+
+#mybatis-plus
+mybatis-plus:
+  mapper-locations: classpath:mapper/**/*.xml
+  #实体扫描，多个package用逗号或者分号分隔
+  typeAliasesPackage: com.how2j.springboot.business.entity
+#  global-config:
+#    #主键类型  0:"数据库ID自增", 1:"用户输入ID",2:"全局唯一ID (数字类型唯一ID)", 3:"全局唯一ID UUID";
+#    id-type: 2
+#    #字段策略 0:"忽略判断",1:"非 NULL 判断"),2:"非空判断"
+#    field-strategy: 2
+#    #驼峰下划线转换
+#    db-column-underline: true
+#    #刷新mapper 调试神器
+#    refresh-mapper: true
+#    #数据库大写下划线转换
+#    #capital-mode: true
+#    #序列接口实现类配置
+#    #key-generator: com.baomidou.springboot.xxx
+#    #逻辑删除配置
+#    logic-delete-value: 1
+#    logic-not-delete-value: 0
+#    #自定义填充策略接口实现
+#    #meta-object-handler: com.baomidou.springboot.xxx
+#    #自定义SQL注入器
+#    sql-injector: com.baomidou.mybatisplus.mapper.LogicSqlInjector
+#  configuration:
+#    map-underscore-to-camel-case: true
+#    cache-enabled: false
+#    call-setters-on-nulls: true
+#
+logging:
+#  file: cjy-platform
+#  path: /opt/logs/cjy-platform
+  level:
+    com.how2java.springboot: debug

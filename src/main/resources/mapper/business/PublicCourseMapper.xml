@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cvaiedu.springboot.business.mapper.PublicCourseMapper">
+    
+    <resultMap id="BaseResultMap" type="com.cvaiedu.springboot.business.entity.PublicCourse">
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="title" jdbcType="VARCHAR" property="title" />
+        <result column="teacher_id" jdbcType="BIGINT" property="teacherId" />
+        <result column="desc" jdbcType="VARCHAR" property="desc" />
+        <collection property="students" ofType="com.cvaiedu.springboot.business.entity.Student"
+        column="id" select="com.cvaiedu.springboot.business.mapper.StudentMapper.getListByCourseId"
+        />
+    </resultMap>
+
+    <select id="list" resultMap="BaseResultMap">
+        select pc.*, t.`name` as teacherName, t.tag as teacherTag, t.img as teacherImg
+        from public_course pc
+        left join teacher t on pc.teacher_id = t.id
+    </select>
+    
+</mapper>
