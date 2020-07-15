@@ -13,9 +13,9 @@ public class ControllerAdvice {
     @ExceptionHandler(value = Exception.class)
     public Result exceptionHandler (Exception ex) {
         if (ex instanceof FrameworkException) {
-            return Result.error();
-        } else {
             return Result.error(ex.getMessage());
+        } else {
+            return Result.error("系统错误，请联系管理员");
         }
     }
 }

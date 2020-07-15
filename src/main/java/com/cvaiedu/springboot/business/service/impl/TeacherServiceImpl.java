@@ -39,8 +39,13 @@ public class TeacherServiceImpl implements TeacherService {
         Teacher entity = teacherMapper.selectById(id);
         return entity;
     }
-	
-	@Override
+
+    @Override
+    public Teacher selectOne(Teacher entity) {
+        return teacherMapper.selectOne(entity);
+    }
+
+    @Override
 	public PageUtils list(Map<String, Object> queryMap) {
         Query<?> query = new Query<>(queryMap);
         Page<Teacher> page = new Page<>(query.getCurrPage(), query.getLimit());

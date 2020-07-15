@@ -1,4 +1,4 @@
-package com.cvaiedu.springboot.business.entity;
+package com.cvaiedu.springboot.system.entity;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -8,32 +8,22 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 /**
- * teacher
+ * user_profile
  * @author 
  */
 @Accessors(chain = true)
 @NoArgsConstructor
 @Data
-public class Teacher implements Serializable {
-
+public class UserProfile implements Serializable {
     private Long id;
 
     private Long userId;
 
-    /**
-     * 教师标签
-     */
-    private String tag;
-
-    /**
-     * 教师图片
-     */
-    private String img;
+    private String name;
 
     private Date createTime;
 
     private Date modifyTime;
 
     private static final long serialVersionUID = 1L;
-
 }

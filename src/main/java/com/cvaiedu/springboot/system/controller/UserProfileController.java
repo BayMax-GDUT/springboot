@@ -3,12 +3,12 @@ package com.cvaiedu.springboot.system.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.cvaiedu.springboot.result.Result;
 import com.cvaiedu.springboot.result.ResultEnum;
-import com.cvaiedu.springboot.system.service.inter.AccountService;
-import com.cvaiedu.springboot.system.entity.Account;
+import com.cvaiedu.springboot.system.service.inter.UserProfileService;
+import com.cvaiedu.springboot.system.entity.UserProfile;
 
-import com.cvaiedu.springboot.utils.PageUtils;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
+import com.cvaiedu.springboot.utils.PageUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.validation.BindingResult;
@@ -25,16 +25,16 @@ import java.util.Map;
  * 通过拦截器，或者AOP的方式，处理异常信息
  *
  * @author code-generator
- * @date 2020-07-06 17:09:38
+ * @date 2020-07-06 17:23:09
  */
 @RestController
-@RequestMapping("/v1/account")
-public class AccountController {
+@RequestMapping("/userProfile")
+public class UserProfileController {
 
     private Logger logger = LoggerFactory.getLogger(getClass());
 
     @Autowired
-    private AccountService service;
+    private UserProfileService service;
 
     /**
      * 根据Id 查询
@@ -44,7 +44,7 @@ public class AccountController {
      */
     @RequestMapping(value = "/getByPrimaryKey")
     public Result getByPrimaryKey(@RequestParam Long id) {
-		logger.info("根据Id查询 accountEntity，参数= {} ", JSONObject.toJSONString(id));
+		logger.info("根据Id查询 userProfileEntity，参数= {} ", JSONObject.toJSONString(id));
 		return Result.ok(service.getByPrimaryKey(id));
     }
         
@@ -56,7 +56,7 @@ public class AccountController {
 	 */
 	@RequestMapping(value = "/list")
 	public Result list(@RequestParam Map<String, Object> queryMap) {
-		logger.info("查询 accountEntity 列表，参数= {} ", JSONObject.toJSONString(queryMap));
+		logger.info("查询 userProfileEntity 列表，参数= {} ", JSONObject.toJSONString(queryMap));
         PageUtils record = service.list(queryMap);
         return Result.ok(record);
 	}
@@ -69,10 +69,10 @@ public class AccountController {
      * @return
      */
     @RequestMapping(value = "/add")
-    public Result save(@RequestBody @Validated Account entity, BindingResult bindingResult) {
-		logger.info("新增 accountEntity，参数= {} ", JSONObject.toJSONString(entity));
+    public Result save(@RequestBody @Validated UserProfile entity, BindingResult bindingResult) {
+		logger.info("新增 userProfileEntity，参数= {} ", JSONObject.toJSONString(entity));
 		if (bindingResult.hasErrors()) {
- 	       logger.error("新增 accountEntity 参数不正确,异常={}", bindingResult.getFieldError().getDefaultMessage());
+ 	       logger.error("新增 userProfileEntity 参数不正确,异常={}", bindingResult.getFieldError().getDefaultMessage());
  	       return Result.error(ResultEnum.ERROR_400.getCode(), bindingResult.getFieldError().getDefaultMessage());
  	    }
         service.save(entity);
@@ -87,10 +87,10 @@ public class AccountController {
      * @return
      */
     @RequestMapping(value = "/update")
-    public Result updateById(@RequestBody @Validated Account entity, BindingResult bindingResult){
-		logger.info("更新 accountEntity，参数= {} ", JSONObject.toJSONString(entity));
+    public Result updateById(@RequestBody @Validated UserProfile entity, BindingResult bindingResult){
+		logger.info("更新 userProfileEntity，参数= {} ", JSONObject.toJSONString(entity));
 		if (bindingResult.hasErrors()) {
- 	       logger.error("更新 accountEntity 参数不正确,异常={}", bindingResult.getFieldError().getDefaultMessage());
+ 	       logger.error("更新 userProfileEntity 参数不正确,异常={}", bindingResult.getFieldError().getDefaultMessage());
  	       return Result.error(ResultEnum.ERROR_400.getCode(), bindingResult.getFieldError().getDefaultMessage());
  	    }
     	service.updateById(entity);
@@ -106,7 +106,7 @@ public class AccountController {
      */
     @RequestMapping(value="/delete")
     public Result deleteById(@RequestBody List<Long> ids) {
-		logger.info("删除 accountEntity，参数= {} ", JSONObject.toJSONString(ids));
+		logger.info("删除 userProfileEntity，参数= {} ", JSONObject.toJSONString(ids));
         service.deleteById(ids);
         return Result.ok();
     }

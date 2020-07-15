@@ -17,6 +17,8 @@ import java.util.Map;
 public interface TeacherService {
 	
     Teacher getByPrimaryKey(Long id);
+
+    Teacher selectOne(Teacher entity);
 	
 	PageUtils list(Map<String, Object> queryMap);
     

@@ -1,6 +1,7 @@
 package com.cvaiedu.springboot.business.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import com.baomidou.mybatisplus.annotations.TableField;
@@ -16,7 +17,8 @@ import lombok.experimental.Accessors;
 @NoArgsConstructor
 @Data
 public class PublicCourse implements Serializable {
-    public Long id;
+
+    private Long id;
 
     /**
      * 标题
@@ -25,7 +27,17 @@ public class PublicCourse implements Serializable {
 
     public Long teacherId;
 
+    /**
+     * 课程描述
+     */
     private String desc;
+
+    /**
+     *
+     */
+    private Date createTime;
+
+    private Date modifyTime;
 
     @TableField(exist = false)
     private List<Student> students;

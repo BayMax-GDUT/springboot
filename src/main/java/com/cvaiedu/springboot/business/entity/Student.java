@@ -2,15 +2,17 @@ package com.cvaiedu.springboot.business.entity;
 
 import lombok.Data;
 
+import java.util.Date;
+
 @Data
 public class Student {
 
     private Long id;
 
-    private Integer accountCode;
+    private Long userId;
 
-    private String name;
+    private Date createTime;
 
-    private Long courseId;
+    private Date modifyTime;
 
 }

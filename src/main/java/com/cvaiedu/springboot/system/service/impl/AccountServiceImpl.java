@@ -6,9 +6,11 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 
 import com.cvaiedu.springboot.system.service.inter.AccountService;
-import com.cvaiedu.springboot.system.entity.AccountEntity;
+import com.cvaiedu.springboot.system.entity.Account;
 import com.cvaiedu.springboot.system.mapper.AccountMapper;
 
+import com.cvaiedu.springboot.utils.PageUtils;
+import com.cvaiedu.springboot.utils.Query;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.annotation.Propagation;
 
@@ -16,7 +18,6 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Map;
-import java.util.Date;
 
 
 /**
@@ -34,25 +35,29 @@ public class AccountServiceImpl implements AccountService {
 
 
     @Override
-    public AccountEntity getByPrimaryKey(Long id) {
-        AccountEntity entity = accountMapper.selectById(id);
+    public Account getByPrimaryKey(Long id) {
+        Account entity = accountMapper.selectById(id);
         return entity;
     }
-	
-	@Override
+
+    @Override
+    public Account selectOne(Account entity) {
+        return accountMapper.selectOne(entity);
+    }
+
+    @Override
 	public PageUtils list(Map<String, Object> queryMap) {
         Query<?> query = new Query<>(queryMap);
-        Page<AccountEntity> page = new Page<>(query.getCurrPage(), query.getLimit());
-        AccountEntity entity = JSONObject.parseObject(JSONObject.toJSONString(queryMap), AccountEntity.class);
-        EntityWrapper<AccountEntity> eWrapper = new EntityWrapper<>(entity);
+        Page<Account> page = new Page<>(query.getCurrPage(), query.getLimit());
+        Account entity = JSONObject.parseObject(JSONObject.toJSONString(queryMap), Account.class);
+        EntityWrapper<Account> eWrapper = new EntityWrapper<>(entity);
         page.setRecords(accountMapper.selectPage(page, eWrapper));
         return new PageUtils(page);
 	}
     
     @Override
     @Transactional(propagation = Propagation.REQUIRED)
-    public void save(AccountEntity entity) {
-        entity.setCreateTime(new Date());		
+    public void save(Account entity) {
     	accountMapper.insert(entity);
     }
 
@@ -64,7 +69,7 @@ public class AccountServiceImpl implements AccountService {
 
 	@Override
     @Transactional(propagation = Propagation.REQUIRED)
-    public void updateById(AccountEntity entity) {			
+    public void updateById(Account entity) {
     	accountMapper.updateById(entity);
     }
 
